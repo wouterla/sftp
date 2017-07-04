@@ -13,10 +13,13 @@ PermitRootLogin no
 X11Forwarding no
 AllowTcpForwarding no
 
-# Force sftp and chroot jail
-Subsystem sftp internal-sftp
+# Force sftp and chroot jail and enable logging
+Subsystem sftp internal-sftp -l INFO
 ForceCommand internal-sftp
 ChrootDirectory %h
 
 # Enable this for more logs
 #LogLevel VERBOSE
+
+# Limit number of simultaneous connections to limit brute force attacks
+MaxStartups 4
